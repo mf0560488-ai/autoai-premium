@@ -1,46 +1,86 @@
-
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoAI Premium Pro</title>
+    <title>Faisal Binary Trading Bot</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-        body { background: #0b0f19; color: #fff; padding: 15px; text-align: center; }
-        .logo-container img { width: 70px; height: 70px; border-radius: 50%; border: 3px solid #22c55e; margin-bottom: 10px; }
-        .card { background: #1e293b; padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left; border: 1px solid #334155; }
-        select, input { width: 100%; padding: 12px; border-radius: 6px; background: #0f172a; color: #fff; border: 1px solid #475569; margin-top: 5px; }
-        .btn { background: #22c55e; color: white; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; margin-top: 15px; border: none; }
-        .btn-browser { background: #f59e0b; margin-top: 10px; }
-        .tabs { display: flex; gap: 5px; margin-bottom: 15px; }
-        .tab-btn { flex: 1; padding: 10px; background: #334155; border: none; color: #fff; border-radius: 6px; cursor: pointer; }
-        .tab-btn.active { background: #2563eb; }
-        .signal-box { background: #0f172a; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #22c55e; }
+        body {
+            background-color: #0d1117;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 15px;
+            text-align: center;
+        }
+        h1 { font-size: 18px; color: #00ffcc; margin-top: 10px; }
+        .card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #8b949e;
+            border-top: 1px solid #30363d;
+            padding-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="logo-container">
-        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Logo">
-        <h2>AUTO AI PREMIUM</h2>
-    </div>
-    <div class="tabs">
-        <button class="tab-btn active" onclick="this.classList.add('active');">লাইভ সিগন্যাল</button>
-        <button class="tab-btn" onclick="this.classList.add('active');">ফিউচার সিগন্যাল</button>
-    </div>
+
+    <h1>FAISAL BINARY TRADING BOT</h1>
+    <p>অ্যাডভান্সড মার্কেট মনিটরিং ও অ্যানালাইসিস ড্যাশবোর্ড</p>
+
+    <!-- মার্কেট সিলেকশন বাটন -->
     <div class="card">
-        <label>মার্কেট সিলেক্ট করুন:</label>
-        <select id="market"><option>EUR/USD (OTC)</option><option>GBP/JPY (Real)</option><option>BTC/USD</option></select>
-        <label>সময় (Time Frame):</label>
-        <select id="timeframe"><option>১ মিনিট (1M)</option><option>৫ মিনিট (5M)</option></select>
-        <button class="btn" onclick="generateSignal()">🔍 স্ক্যান ও জেনারেট করুন</button>
+        <h3>📊 মার্কেট নির্বাচন করুন</h3>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn" onclick="showMarket('OTC')">OTC Market</button>
+            <button class="btn" onclick="showMarket('Real')">Real Market</button>
+        </div>
     </div>
-    <div class="card" id="resultCard" style="display:none;">
-        <h3>📊 রেজাল্ট</h3>
-        <div class="signal-box" id="signalOutput"></div>
-        <button class="btn btn-browser" onclick="window.open('https://pocketoption.com/', '_blank')">🚀 ব্রাউজারে অটো-ট্রেড নিন</button>
+
+    <!-- টাইমফ্রেম বাটন -->
+    <div class="card" id="timeframe-section" style="display:none;">
+        <h3>⏱️ সময় নির্বাচন করুন</h3>
+        <div style="display: flex; gap: 5px;">
+            <button class="btn" onclick="setTimer('1m')">1 Min</button>
+            <button class="btn" onclick="setTimer('5m')">5 Min</button>
+            <button class="btn" onclick="setTimer('15m')">15 Min</button>
+        </div>
     </div>
+
+    <!-- ফুটার যেখানে অনারের নাম ফিক্সড থাকবে -->
+    <div class="footer">
+        <p>Powered & Managed by Bot Owner: <b>Faisal</b></p>
+        <p>© 2026 Faisal Binary Trading Bot. All Rights Reserved.</p>
+    </div>
+
     <script>
-        function generateSignal() {
-            document.getElementById('resultCard').style.display = 'block';
-            let dir = Math.random() > 0.5 ? "CALL / BUY 🟢" : "PUT / SELL 🔴";
-            document.getElem
+        function showMarket(type) {
+            document.getElementById('timeframe-section').style.display = 'block';
+            alert(type + ' মার্কেট সিলেক্ট হয়েছে। এখন টাইমফ্রেম বেছে নিন।');
+        }
+        
+        function setTimer(time) {
+            alert('আপনি ' + time + ' টাইমফ্রেম সিলেক্ট করেছেন। এখন চার্ট দেখে নিজে ট্রেড এক্সিকিউট করুন।');
+        }
+    </script>
+</body>
+</html>
