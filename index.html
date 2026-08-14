@@ -1,1 +1,50 @@
-
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoAI Premium Pro</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
+        body { background: #0b0f19; color: #fff; padding: 15px; text-align: center; }
+        .logo-container img { width: 70px; height: 70px; border-radius: 50%; border: 3px solid #22c55e; margin-bottom: 10px; }
+        .card { background: #1e293b; padding: 15px; border-radius: 12px; margin-bottom: 15px; text-align: left; border: 1px solid #334155; }
+        select, input { width: 100%; padding: 12px; border-radius: 6px; background: #0f172a; color: #fff; border: 1px solid #475569; margin-top: 5px; }
+        .btn { background: #22c55e; color: white; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; margin-top: 15px; border: none; }
+        .btn-browser { background: #f59e0b; margin-top: 10px; }
+        .tabs { display: flex; gap: 5px; margin-bottom: 15px; }
+        .tab-btn { flex: 1; padding: 10px; background: #334155; border: none; color: #fff; border-radius: 6px; cursor: pointer; }
+        .tab-btn.active { background: #2563eb; }
+        .signal-box { background: #0f172a; padding: 15px; border-radius: 8px; margin-top: 10px; border-left: 4px solid #22c55e; }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/4712/4712109.png" alt="Logo">
+        <h2>AUTO AI PREMIUM</h2>
+    </div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="this.classList.add('active');">লাইভ সিগন্যাল</button>
+        <button class="tab-btn" onclick="this.classList.add('active');">ফিউচার সিগন্যাল</button>
+    </div>
+    <div class="card">
+        <label>মার্কেট সিলেক্ট করুন:</label>
+        <select id="market"><option>EUR/USD (OTC)</option><option>GBP/JPY (Real)</option><option>BTC/USD</option></select>
+        <label>সময় (Time Frame):</label>
+        <select id="timeframe"><option>১ মিনিট (1M)</option><option>৫ মিনিট (5M)</option></select>
+        <button class="btn" onclick="generateSignal()">🔍 স্ক্যান ও জেনারেট করুন</button>
+    </div>
+    <div class="card" id="resultCard" style="display:none;">
+        <h3>📊 রেজাল্ট</h3>
+        <div class="signal-box" id="signalOutput"></div>
+        <button class="btn btn-browser" onclick="window.open('https://pocketoption.com/', '_blank')">🚀 ব্রাউজারে অটো-ট্রেড নিন</button>
+    </div>
+    <script>
+        function generateSignal() {
+            document.getElementById('resultCard').style.display = 'block';
+            let dir = Math.random() > 0.5 ? "CALL / BUY 🟢" : "PUT / SELL 🔴";
+            document.getElementById('signalOutput').innerHTML = `<b>ডিরেকশন:</b> <span style="font-size:18px;">${dir}</span><br>অ্যানালাইসিস সম্পন্ন!`;
+        }
+    </script>
+</body>
+</html>
