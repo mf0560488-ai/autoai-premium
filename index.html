@@ -3,84 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faisal Binary Trading Bot</title>
+    <title>Binary Trading Bot - Faisal 99</title>
     <style>
-        body {
-            background-color: #0d1117;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
-            padding: 15px;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0b0e14;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 450px;
             text-align: center;
         }
-        h1 { font-size: 18px; color: #00ffcc; margin-top: 10px; }
+        .header h1 {
+            font-size: 22px;
+            color: #00ffcc;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .header p {
+            font-size: 13px;
+            color: #a0aec0;
+            margin-bottom: 20px;
+        }
         .card {
-            background: #161b22;
-            border: 1px solid #30363d;
+            background: #131b2e;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
             padding: 15px;
-            margin: 12px 0;
-            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .card h3 {
+            font-size: 15px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+        .card p {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+        .control-group {
+            margin-bottom: 12px;
+        }
+        .control-group label {
+            display: block;
+            font-size: 13px;
+            color: #00ffcc;
+            margin-bottom: 6px;
             text-align: left;
         }
+        select {
+            width: 100%;
+            padding: 10px;
+            background: #1a2234;
+            color: white;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+        }
         .btn {
-            background: #238636;
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #10b981;
             color: white;
             border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 8px;
+            margin-top: 15px;
+            text-align: center;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background: #059669;
+        }
+        .output-box {
+            background: #1a2234;
+            border: 1px dashed #00ffcc;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+        .output-box h4 {
+            color: #00ffcc;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .output-box p {
+            font-size: 14px;
+            font-weight: bold;
         }
         .footer {
-            margin-top: 30px;
+            text-align: center;
             font-size: 12px;
-            color: #8b949e;
-            border-top: 1px solid #30363d;
-            padding-top: 10px;
+            color: #6b7280;
+            margin-top: 20px;
+        }
+        .footer span {
+            color: #00ffcc;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <h1>FAISAL BINARY TRADING BOT</h1>
-    <p>অ্যাডভান্সড মার্কেট মনিটরিং ও অ্যানালাইসিস ড্যাশবোর্ড</p>
+    <div class="container">
+        <div class="header">
+            <h1>Binary Trading Bot</h1>
+            <p>অ্যাডভান্সড মার্কেট মনিটরিং ও অ্যানালাইসিস ড্যাশবোর্ড</p>
+        </div>
 
-    <!-- মার্কেট সিলেকশন বাটন -->
-    <div class="card">
-        <h3>📊 মার্কেট নির্বাচন করুন</h3>
-        <div style="display: flex; gap: 10px;">
-            <button class="btn" onclick="showMarket('OTC')">OTC Market</button>
-            <button class="btn" onclick="showMarket('Real')">Real Market</button>
+        <div class="card">
+            <div class="control-group">
+                <label for="timeframe">⏰ টাইমফ্রেম সিলেক্ট করুন:</label>
+                <select id="timeframe">
+                    <option value="1m">1 Minute (1 মিনিট)</option>
+                    <option value="5m">5 Minutes (5 মিনিট)</option>
+                    <option value="15m">15 Minutes (15 মিনিট)</option>
+                </select>
+            </div>
+
+            <div class="control-group" style="margin-top: 10px;">
+                <label for="market">📊 মার্কেট সিলেক্ট করুন:</label>
+                <select id="market">
+                    <option value="otc">OTC Market (ইউরো/ইউএসডি)</option>
+                    <option value="real">Real Market (জিবিপি/ইউএসডি)</option>
+                </select>
+            </div>
+        </div>
+
+        <button class="btn" onclick="generateSignal()">সিগন্যাল জেনারেট করুন</button>
+
+        <div class="output-box" id="signalOutput">
+            <h4>রিসাল্ট সিগন্যাল:</h4>
+            <p id="signalText">অপেক্ষা করুন...</p>
         </div>
     </div>
 
-    <!-- টাইমফ্রেম বাটন -->
-    <div class="card" id="timeframe-section" style="display:none;">
-        <h3>⏱️ সময় নির্বাচন করুন</h3>
-        <div style="display: flex; gap: 5px;">
-            <button class="btn" onclick="setTimer('1m')">1 Min</button>
-            <button class="btn" onclick="setTimer('5m')">5 Min</button>
-            <button class="btn" onclick="setTimer('15m')">15 Min</button>
-        </div>
-    </div>
-
-    <!-- ফুটার যেখানে অনারের নাম ফিক্সড থাকবে -->
     <div class="footer">
-        <p>Powered & Managed by Bot Owner: <b>Faisal</b></p>
-        <p>© 2026 Faisal Binary Trading Bot. All Rights Reserved.</p>
+        Powered & Managed by Bot Owner: <span>Faisal 99</span><br>
+        &copy; 2026 Binary Trading Bot. All Rights Reserved.
     </div>
 
     <script>
-        function showMarket(type) {
-            document.getElementById('timeframe-section').style.display = 'block';
-            alert(type + ' মার্কেট সিলেক্ট হয়েছে। এখন টাইমফ্রেম বেছে নিন।');
-        }
-        
-        function setTimer(time) {
-            alert('আপনি ' + time + ' টাইমফ্রেম সিলেক্ট করেছেন। এখন চার্ট দেখে নিজে ট্রেড এক্সিকিউট করুন।');
+        function generateSignal() {
+            const tf = document.getElementById('timeframe').value;
+            const market = document.getElementById('market').value;
+            const outputBox = document.getElementById('signalOutput');
+            const signalText = document.getElementById('signalText');
+
+            outputBox.style.display = 'block';
+            signalText.innerHTML = "অ্যানালাইসিস করা হচ্ছে...";
+            signalText.style.color = "#fbbf24";
+
+            setTimeout(() => {
+                const signals = [
+                    { type: "CALL (UP 🟢)", color: "#10b981" },
+                    { type: "PUT (DOWN 🔴)", color: "#ef4444" }
+                ];
+                
+                // রেন্ডম সিগন্যাল জেনারেট করার জন্য
+                const randomSignal = signals[Math.floor(Math.random() * signals.length)];
+                const marketName = market === 'otc' ? 'OTC Market' : 'Real Market';
+                
+                signalText.innerHTML = `${marketName} (${tf}): <span style="color:${randomSignal.color}">${randomSignal.type}</span>`;
+            }, 1000);
         }
     </script>
+
 </body>
 </html>
